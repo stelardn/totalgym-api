@@ -3,3 +3,6 @@ build
 
 ## Dependencies
 node_modules
+
+## Envs
+*.env
