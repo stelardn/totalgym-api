@@ -4,7 +4,7 @@ import { hash } from 'bcryptjs'
 import { GetUserProfileUseCase } from './get-user-profile'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
-describe('Register use case', () => {
+describe('Get user profile use case', () => {
   let usersRespository: InMemoryUserRespository
   let sut: GetUserProfileUseCase
 
@@ -13,7 +13,7 @@ describe('Register use case', () => {
     sut = new GetUserProfileUseCase(usersRespository)
   })
 
-  test('It should be able to authenticate', async () => {
+  test('It should be able to get a user profile', async () => {
     const createdUser = await usersRespository.create({
       name: 'John Doe',
       email: 'joh@doe.com',
@@ -27,7 +27,7 @@ describe('Register use case', () => {
     expect(user.name).toEqual('John Doe')
   })
 
-  test('It should not be able to authenticate with wrong id', async () => {
+  test('It should not be able to get a non-existing user profile', async () => {
     await expect(async () =>
       await sut.execute({
         userId: 'Non-existing-id'
