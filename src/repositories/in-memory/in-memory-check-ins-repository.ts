@@ -3,7 +3,7 @@ import { type CheckIn, type Prisma } from '@prisma/client'
 import { type CheckInsRepository } from '../check-ins-repository'
 import { randomUUID } from 'node:crypto'
 
-export class InMemoryCheckInsRespository implements CheckInsRepository {
+export class InMemoryCheckInsRepository implements CheckInsRepository {
   public items: CheckIn[] = []
   async findByUserIdOnDate (userId: string, date: Date) {
     const startOfTheDay = dayjs(date).startOf('date')

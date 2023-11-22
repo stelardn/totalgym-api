@@ -1,16 +1,29 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { CheckInUseCase } from './check-in'
-import { InMemoryCheckInsRespository } from '@/repositories/in-memory/in-memory-check-ins-repository'
+import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
+import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
+import { Decimal } from '@prisma/client/runtime/library'
 
 describe('Check-in use case', () => {
-  let inMemoryCheckInRepository: InMemoryCheckInsRespository
+  let checkInRepository: InMemoryCheckInsRepository
+  let gymsRepository: InMemoryGymsRepository
   let sut: CheckInUseCase
 
   beforeEach(() => {
-    inMemoryCheckInRepository = new InMemoryCheckInsRespository()
-    sut = new CheckInUseCase(inMemoryCheckInRepository)
+    checkInRepository = new InMemoryCheckInsRepository()
+    gymsRepository = new InMemoryGymsRepository()
+    sut = new CheckInUseCase(checkInRepository, gymsRepository)
 
     vi.useFakeTimers()
+
+    gymsRepository.items.push({
+      id: 'gym-01',
+      title: 'JS Gym',
+      description: '',
+      latitude: new Decimal(0),
+      longitude: new Decimal(0),
+      phone: '12121212'
+    })
   })
 
   afterEach(() => {
@@ -20,7 +33,9 @@ describe('Check-in use case', () => {
   it('Should be able to check in', async () => {
     const { checkIn } = await sut.execute({
       gymId: 'gym-01',
-      userId: 'user-01'
+      userId: 'user-01',
+      userLatitude: 0,
+      userLongitude: 0
     })
 
     expect(checkIn.id).toEqual(expect.any(String))
@@ -31,13 +46,17 @@ describe('Check-in use case', () => {
 
     await sut.execute({
       gymId: 'gym-01',
-      userId: 'user-01'
+      userId: 'user-01',
+      userLatitude: 0,
+      userLongitude: 0
     })
 
     await expect(async () =>
       await sut.execute({
         gymId: 'gym-01',
-        userId: 'user-01'
+        userId: 'user-01',
+        userLatitude: 0,
+        userLongitude: 0
       })
     ).rejects.toBeInstanceOf(Error)
   })
