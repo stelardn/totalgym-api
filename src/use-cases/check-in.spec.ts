@@ -60,4 +60,17 @@ describe('Check-in use case', () => {
       })
     ).rejects.toBeInstanceOf(Error)
   })
+
+  it('Should not be able to check in from a distance greater than 100m', async () => {
+    vi.setSystemTime(new Date(2022, 0, 1, 8, 0, 0))
+
+    await expect(async () =>
+      await sut.execute({
+        gymId: 'gym-01',
+        userId: 'user-01',
+        userLatitude: 1,
+        userLongitude: 1
+      })
+    ).rejects.toBeInstanceOf(Error)
+  })
 })
