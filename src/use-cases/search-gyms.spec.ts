@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
 import { SearchGymsUseCase } from './search-gyms'
 
-describe('Fetch user check-in history use case', () => {
+describe('Search gyms use case', () => {
   let gymsRepository: InMemoryGymsRepository
   let sut: SearchGymsUseCase
 
