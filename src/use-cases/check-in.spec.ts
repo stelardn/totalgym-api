@@ -3,7 +3,7 @@ import { CheckInUseCase } from './check-in'
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
 import { MaxDistanceError } from './errors/max-distance-error'
-import { MaxNummberOfCheckInsError } from './errors/max-number-of-check-ins-error copy'
+import { MaxNumberOfCheckInsError } from './errors/max-number-of-check-ins-error'
 
 describe('Check-in use case', () => {
   let checkInRepository: InMemoryCheckInsRepository
@@ -59,7 +59,7 @@ describe('Check-in use case', () => {
         userLatitude: 0,
         userLongitude: 0
       })
-    ).rejects.toBeInstanceOf(MaxNummberOfCheckInsError)
+    ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   it('Should not be able to check in from a distance greater than 100m', async () => {
