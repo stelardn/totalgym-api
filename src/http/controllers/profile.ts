@@ -3,8 +3,6 @@ import { type FastifyReply, type FastifyRequest } from 'fastify'
 const getUserProfile = makeGetUserProfileUseCase()
 
 export async function profile (request: FastifyRequest, reply: FastifyReply) {
-  await request.jwtVerify()
-
   const { user } = await getUserProfile.execute({
     userId: request.user.sub
   })
