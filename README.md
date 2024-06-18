@@ -73,7 +73,7 @@ To get a local copy of the project up and running, follow these steps:
 - `GET /gyms/search?q=`: Get a paginated list of the gyms with names that match a query specified by the user.
 - `GET /gyms/nearby`: Get a list of the gyms within 10 km of distance from the authenticated user location (using latitude and longitude).
 
-### Checkin Endpoints
+### Check-in Endpoints
 
 - `POST /gyms/:gymId/check-in`: Create a new check-in record.
 - `GET /check-ins/history`: Get a history of the check-ins of the user with active session.
