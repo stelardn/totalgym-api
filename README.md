@@ -147,5 +147,3 @@ Before running end-to-end tests (`test:e2e`), ensure you have set up the Prisma 
   ```bash
   npm run test:coverage
   ```
-
-```
